@@ -8,22 +8,26 @@
 #include <iostream>
 
 using namespace std;
-struct vexNode {
-    string placename;
-    string introduction;
-};
+#define INT__MAX	   65000										//最大值65535，表示两顶点没有联系
+#define MAX_VERTEX_NUM 10											//最多顶点数
 
+typedef char VertexType;
+typedef int  EdgeType;
+
+
+//顶点信息
+typedef struct ArcCell {
+    EdgeType wight;
+
+}ArcCell, AdjMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
 class map {
-
 private:
-    vexNode vexs[50];
-    int n{}, m{};   // num of vertexes and edges.
-    int e[10][10]{};
-    int dis[10]{}; // for dijkstra
-    int distance[10][10]{}; // for floyd
-    int book[10]{};
-    int path[10][10]{};
-    static const int inf = 99999999; // infinity.
+    VertexType vexs[MAX_VERTEX_NUM]{};								//顶点向量
+    AdjMatrix  arcs;												//邻接矩阵
+    int vexnum{}, arcnum{};
+    bool final[MAX_VERTEX_NUM]{}; // 标记各顶点是否找到最短路径
+    EdgeType dist[MAX_VERTEX_NUM]{}; // 最短路径长度
+    VertexType path[MAX_VERTEX_NUM]{}; // 路径上的前驱
     void createGraph(); // for init
 public:
 
